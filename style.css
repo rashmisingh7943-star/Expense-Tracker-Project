@@ -1316,7 +1316,6 @@ body.dark .topbar{
     .cards{
         grid-template-columns:1fr;
     }
-
     .transaction-item{
         flex-direction:column;
         align-items:flex-start;
@@ -1396,4 +1395,183 @@ body.dark .topbar{
 
 ::-webkit-scrollbar-thumb:hover{
     background:#1d4ed8;
+}
+/*==========================================
+        MOBILE RESPONSIVE IMPROVEMENTS
+==========================================*/
+
+@media (max-width: 992px){
+
+    .sidebar{
+        width:220px;
+        padding:20px 15px;
+    }
+
+    .main-content{
+        padding:25px;
+    }
+
+    .topbar{
+        flex-wrap:wrap;
+        gap:15px;
+    }
+
+    .top-right{
+        width:100%;
+        justify-content:flex-start;
+        flex-wrap:wrap;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .container{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        padding:20px;
+    }
+
+    .logo{
+        justify-content:center;
+    }
+
+    .sidebar ul{
+        display:flex;
+        overflow-x:auto;
+        gap:10px;
+        padding-bottom:10px;
+    }
+
+    .sidebar li{
+        white-space:nowrap;
+        margin-bottom:0;
+        flex-shrink:0;
+    }
+
+    .tip-card{
+        display:none;
+    }
+
+    .main-content{
+        width:100%;
+        padding:20px;
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .top-right{
+        width:100%;
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .top-right input,
+    #themeToggle{
+        width:100%;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .transaction-item{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .transaction-left,
+    .transaction-right{
+        width:100%;
+    }
+
+    .transaction-right{
+        justify-content:space-between;
+        flex-wrap:wrap;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .transaction-tools{
+        width:100%;
+        flex-direction:column;
+    }
+
+    .transaction-tools input,
+    .transaction-tools select{
+        width:100%;
+    }
+
+    .report-grid,
+    .category-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media (max-width:480px){
+
+    .main-content{
+        padding:15px;
+    }
+
+    .card,
+    .transaction-box,
+    .recent-transactions,
+    .settings-box{
+        padding:18px;
+    }
+
+    .card-info h2{
+        font-size:24px;
+    }
+
+    .topbar h1{
+        font-size:24px;
+    }
+
+    .section-title h2{
+        font-size:20px;
+    }
+
+    .form-buttons{
+        flex-direction:column;
+    }
+
+    .add-btn,
+    .export-btn,
+    .danger-btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    .transaction-icon{
+        width:45px;
+        height:45px;
+        font-size:18px;
+    }
+
+    .transaction-info h4{
+        font-size:15px;
+    }
+
+    .amount-income,
+    .amount-expense{
+        font-size:15px;
+    }
+
 }

@@ -137,6 +137,31 @@ h2{
     border-radius:8px;
 
 }
+.info{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+}
+
+.info strong{
+    color:#333;
+}
+
+.info small{
+    color:#666;
+}
+
+.amount{
+    font-weight:bold;
+}
+
+.list li.income{
+    border-left-color:#10b981;
+}
+
+.list li.expense{
+    border-left-color:#ef4444;
+}
 
 @media(max-width:600px){
 

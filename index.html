@@ -1,97 +1,569 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker</title>
+
+    <title>Expense Tracker Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <h1>💰 Expense Tracker</h1>
+        <!-- ================= Sidebar Start ================= -->
 
-    <!-- Summary -->
+        <aside class="sidebar">
 
-    <div class="summary">
+            <div class="logo">
 
-        <div class="card balance">
-            <h3>Balance</h3>
-            <p id="balance">₹0.00</p>
-        </div>
+                <div class="logo-icon">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
 
-        <div class="card income">
-            <h3>Income</h3>
-            <p id="income">₹0.00</p>
-        </div>
+                <h2>Expense Tracker</h2>
 
-        <div class="card expense">
-            <h3>Expense</h3>
-            <p id="expense">₹0.00</p>
-        </div>
+            </div>
 
-    </div>
+            <nav>
 
-    <!-- Form -->
+                <ul>
 
-    <form id="form">
+                    <li class="active" data-page="dashboard">
+                        <i class="fa-solid fa-table-columns"></i>
+                        <span>Dashboard</span>
+                    </li>
 
-        <input
-            type="text"
-            id="text"
-            placeholder="Enter Description"
-            required
-        >
+                    <li data-page="transactions">
+                        <i class="fa-solid fa-list"></i>
+                        <span>Transactions</span>
+                    </li>
 
-        <select id="category" required>
+                    <li data-page="categories">
+                        <i class="fa-solid fa-tags"></i>
+                        <span>Categories</span>
+                    </li>
 
-            <option value="">Select Category</option>
-            <option value="Salary">Salary</option>
-            <option value="Food">Food</option>
-            <option value="Shopping">Shopping</option>
-            <option value="Travel">Travel</option>
-            <option value="Bills">Bills</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Health">Health</option>
-            <option value="Other">Other</option>
+                    <li data-page="reports">
+                        <i class="fa-solid fa-chart-column"></i>
+                        <span>Reports</span>
+                    </li>
 
-        </select>
+                    <li data-page="settings">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Settings</span>
+                    </li>
 
-        <input
-            type="date"
-            id="date"
-            required
-        >
+                </ul>
 
-        <input
-            type="number"
-            id="amount"
-            placeholder="Enter Amount (+/-)"
-            required
-        >
+            </nav>
 
-        <button type="submit">
-            Add Transaction
-        </button>
+            <div class="sidebar-bottom">
 
-    </form>
-<!-- Export Button -->
+                <div class="tip-card">
 
-<button id="exportBtn">
-    Export CSV
-</button>
+                    <i class="fa-solid fa-lightbulb"></i>
 
-    <h2>Transactions</h2>
+                    <h4>Quick Tip</h4>
 
-    <ul id="transactions" class="list">
+                    <p>
+                        Track your expenses daily and build
+                        a better financial future.
+                    </p>
 
-    </ul>
+                </div>
+
+            </div>
+
+        </aside>
+
+        <!-- ================= Sidebar End ================= -->
+
+
+        <!-- ================= Main Content Start ================= -->
+
+        <main class="main-content">
+
+            <!-- Header -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Good Afternoon,
+                        <span class="username">Rashmi</span>
+                        👋
+                    </h1>
+
+                    <p>
+                        Here's your financial overview
+                    </p>
+
+                </div>
+
+                <div class="top-right">
+
+                    <input type="date" id="date">
+
+                    <button id="themeToggle">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+
+                </div>
+
+            </header>
+
+            <!-- Dashboard Page -->
+
+            <section id="dashboard" class="page active-page">
+                            <!-- ================= Summary Cards ================= -->
+
+            <div class="cards">
+
+                <!-- Balance Card -->
+
+                <div class="card balance-card">
+
+                    <div class="card-icon blue">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+
+                    <div class="card-info">
+
+                        <h4>Total Balance</h4>
+
+                        <h2 id="totalBalance">₹0.00</h2>
+
+                        <p>Your current balance</p>
+
+                    </div>
+
+                </div>
+
+                <!-- Income Card -->
+
+                <div class="card income-card">
+
+                    <div class="card-icon green">
+                        <i class="fa-solid fa-circle-arrow-up"></i>
+                    </div>
+
+                    <div class="card-info">
+
+                        <h4>Total Income</h4>
+
+                        <h2 id="totalIncome">₹0.00</h2>
+
+                        <p>Total money earned</p>
+
+                    </div>
+
+                </div>
+
+                <!-- Expense Card -->
+
+                <div class="card expense-card">
+
+                    <div class="card-icon red">
+                        <i class="fa-solid fa-circle-arrow-down"></i>
+                    </div>
+
+                    <div class="card-info">
+
+                        <h4>Total Expense</h4>
+
+                        <h2 id="totalExpense">₹0.00</h2>
+
+                        <p>Total money spent</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= Add Transaction ================= -->
+
+            <section class="transaction-box">
+
+                <div class="section-title">
+
+                    <i class="fa-solid fa-file-circle-plus"></i>
+
+                    <h2>Add New Transaction</h2>
+
+                </div>
+
+                <form id="transactionForm">
+
+                    <div class="form-grid">
+
+                        <!-- Description -->
+
+                        <div class="form-group">
+
+                            <label>Description</label>
+
+                            <input
+                                type="text"
+                                id="description"
+                                placeholder="Enter description (Food, Salary...)"
+                                required>
+
+                        </div>
+
+
+                        <!-- Category -->
+
+                        <div class="form-group">
+
+                            <label>Category</label>
+
+                            <select id="category" required>
+
+                                <option value="">
+                                    Select Category
+                                </option>
+
+                                <option value="Salary">
+                                    Salary
+                                </option>
+
+                                <option value="Food">
+                                    Food
+                                </option>
+
+                                <option value="Shopping">
+                                    Shopping
+                                </option>
+
+                                <option value="Travel">
+                                    Travel
+                                </option>
+
+                                <option value="Bills">
+                                    Bills
+                                </option>
+
+                                <option value="Entertainment">
+                                    Entertainment
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- Date -->
+
+                        <div class="form-group">
+
+                            <label>Date</label>
+
+                            <input
+                                type="date"
+                                id="transactionDate"
+                                required>
+
+                        </div>
+
+
+
+                        <!-- Amount -->
+
+                        <div class="form-group">
+
+                            <label>Amount</label>
+
+                            <input
+                                type="number"
+                                id="amount"
+                                placeholder="Enter amount"
+                                required>
+
+                        </div>
+
+
+
+                        <!-- Type -->
+
+                        <div class="form-group">
+
+                            <label>Transaction Type</label>
+
+                            <select id="type" required>
+
+                                <option value="">
+                                    Select Type
+                                </option>
+
+                                <option value="Income">
+                                    Income
+                                </option>
+
+                                <option value="Expense">
+                                    Expense
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Buttons -->
+
+                    <div class="form-buttons">
+
+                        <button
+                            type="submit"
+                            class="add-btn">
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            Add Transaction
+
+                        </button>
+
+                        <button
+                            type="button"
+                            id="exportCSV"
+                            class="export-btn">
+
+                            <i class="fa-solid fa-file-csv"></i>
+
+                            Export CSV
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- ================= Recent Transactions ================= -->
+
+            <section class="recent-transactions">
+
+                <div class="section-title">
+
+                    <h2>Recent Transactions</h2>
+
+                </div>
+
+                <div id="transactionList">
+                                        <!-- Transaction List (JavaScript se data aayega) -->
+
+                </div>
+
+            </section>
+
+        </section>
+        <!-- Dashboard Page End -->
+
+
+
+        <!-- ================= Transactions Page ================= -->
+
+        <section id="transactions" class="page">
+
+            <div class="page-header">
+                <h2>All Transactions</h2>
+
+                <div class="transaction-tools">
+
+                    <input
+                        type="text"
+                        id="searchTransaction"
+                        placeholder="Search transaction...">
+
+                    <select id="filterCategory">
+
+                        <option value="All">All Categories</option>
+                        <option value="Salary">Salary</option>
+                        <option value="Food">Food</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Bills">Bills</option>
+                        <option value="Entertainment">Entertainment</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div id="allTransactions"></div>
+
+        </section>
+
+
+
+        <!-- ================= Categories Page ================= -->
+
+        <section id="categories" class="page">
+
+            <div class="page-header">
+
+                <h2>Categories</h2>
+
+            </div>
+
+            <div class="category-grid">
+
+                <div class="category-card">
+                    <i class="fa-solid fa-burger"></i>
+                    <h3>Food</h3>
+                </div>
+
+                <div class="category-card">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <h3>Shopping</h3>
+                </div>
+
+                <div class="category-card">
+                    <i class="fa-solid fa-car"></i>
+                    <h3>Travel</h3>
+                </div>
+
+                <div class="category-card">
+                    <i class="fa-solid fa-house"></i>
+                    <h3>Bills</h3>
+                </div>
+
+                <div class="category-card">
+                    <i class="fa-solid fa-film"></i>
+                    <h3>Entertainment</h3>
+                </div>
+
+                <div class="category-card">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    <h3>Salary</h3>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= Reports Page ================= -->
+
+        <section id="reports" class="page">
+
+            <div class="page-header">
+
+                <h2>Reports</h2>
+
+            </div>
+
+            <div class="report-grid">
+
+                <div class="report-card">
+
+                    <h3>Total Income</h3>
+
+                    <p id="reportIncome">₹0.00</p>
+
+                </div>
+
+                <div class="report-card">
+
+                    <h3>Total Expense</h3>
+
+                    <p id="reportExpense">₹0.00</p>
+
+                </div>
+
+                <div class="report-card">
+
+                    <h3>Current Balance</h3>
+
+                    <p id="reportBalance">₹0.00</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= Settings Page ================= -->
+
+        <section id="settings" class="page">
+
+            <div class="page-header">
+
+                <h2>Settings</h2>
+
+            </div>
+
+            <div class="settings-box">
+
+                <div class="setting-item">
+
+                    <span>Dark Mode</span>
+
+                    <label class="switch">
+
+                        <input type="checkbox" id="darkMode">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+                <div class="setting-item">
+
+                    <button id="clearData" class="danger-btn">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Clear All Data
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
 
 </div>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>

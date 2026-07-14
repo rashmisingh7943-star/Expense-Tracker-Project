@@ -1,3 +1,2 @@
-// Expense Tracker
 
-console.log("Expense Tracker Initialized");
+console.log("Expense Tracker UI Ready");

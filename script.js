@@ -13,6 +13,7 @@ const incomeEl = document.getElementById("income");
 const expenseEl = document.getElementById("expense");
 
 const transactionList = document.getElementById("transactions");
+const exportBtn = document.getElementById("exportBtn");
 
 // =========================
 // Local Storage
@@ -76,13 +77,15 @@ function addTransaction(e){
     form.reset();
 
 }
+
 // =========================
 // Delete Transaction
 // =========================
 
 function deleteTransaction(id){
 
-    transactions = transactions.filter(
+    transactions =
+    transactions.filter(
         transaction => transaction.id !== id
     );
 
@@ -106,53 +109,58 @@ function renderTransactions(){
         document.createElement("li");
 
         li.classList.add(
+
             transaction.amount > 0
             ?
             "income"
             :
             "expense"
+
         );
-li.innerHTML = `
 
-<div class="info">
+        li.innerHTML = `
 
-    <strong>${transaction.text}</strong>
+        <div class="info">
 
-    <small>
+            <strong>${transaction.text}</strong>
 
-        ${transaction.category}
+            <small>
 
-        |
+            ${transaction.category}
 
-        ${transaction.date}
+            |
 
-    </small>
+            ${transaction.date}
 
-</div>
+            </small>
 
-<div>
+        </div>
 
-    <span class="amount">
+        <div>
 
-        ${transaction.amount > 0 ? "+" : "-"}
+            <span class="amount">
 
-        ₹${Math.abs(transaction.amount)}
+            ${transaction.amount > 0 ? "+" : "-"}
 
-    </span>
+            ₹${Math.abs(transaction.amount)}
 
-    <button
-        class="delete-btn"
-        onclick="deleteTransaction(${transaction.id})"
-    >
-        ❌
-    </button>
+            </span>
 
-</div>
+            <button
 
-`;
-        
+            class="delete-btn"
 
-        
+            onclick="deleteTransaction(${transaction.id})"
+
+            >
+
+            ❌
+
+            </button>
+
+        </div>
+
+        `;
 
         transactionList.appendChild(li);
 
@@ -199,14 +207,71 @@ function updateSummary(){
     )
     .toFixed(2);
 
-    balanceEl.textContent = `₹${balance}`;
-    incomeEl.textContent = `₹${income}`;
-    expenseEl.textContent = `₹${Math.abs(expense)}`;
+    balanceEl.textContent =
+    `₹${balance}`;
+
+    incomeEl.textContent =
+    `₹${income}`;
+
+    expenseEl.textContent =
+    `₹${Math.abs(expense)}`;
 
 }
 
 // =========================
-// Event Listener
+// Export Transactions as CSV
+// =========================
+
+function exportCSV(){
+
+    if(transactions.length === 0){
+
+        alert("No transactions available to export.");
+
+        return;
+
+    }
+
+    let csv =
+    "Description,Category,Date,Amount\n";
+
+    transactions.forEach(transaction=>{
+
+        csv +=
+        `"${transaction.text}","${transaction.category}","${transaction.date}","${transaction.amount}"\n`;
+
+    });
+
+    const blob =
+    new Blob(
+        [csv],
+        {
+            type:"text/csv"
+        }
+    );
+
+    const url =
+    window.URL.createObjectURL(blob);
+
+    const a =
+    document.createElement("a");
+
+    a.href = url;
+
+    a.download = "transactions.csv";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    window.URL.revokeObjectURL(url);
+
+}
+
+// =========================
+// Event Listeners
 // =========================
 
 form.addEventListener(
@@ -214,6 +279,13 @@ form.addEventListener(
     addTransaction
 );
 
+exportBtn.addEventListener(
+    "click",
+    exportCSV
+);
+
+// =========================
 // Initial Render
+// =========================
 
 renderTransactions();

@@ -76,6 +76,21 @@ function addTransaction(e){
     form.reset();
 
 }
+// =========================
+// Delete Transaction
+// =========================
+
+function deleteTransaction(id){
+
+    transactions = transactions.filter(
+        transaction => transaction.id !== id
+    );
+
+    updateLocalStorage();
+
+    renderTransactions();
+
+}
 
 // =========================
 // Render Transactions
@@ -97,34 +112,47 @@ function renderTransactions(){
             :
             "expense"
         );
+li.innerHTML = `
 
-        li.innerHTML = `
+<div class="info">
 
-        <div class="info">
+    <strong>${transaction.text}</strong>
 
-            <strong>${transaction.text}</strong>
+    <small>
 
-            <small>
+        ${transaction.category}
 
-            ${transaction.category}
+        |
 
-            |
+        ${transaction.date}
 
-            ${transaction.date}
+    </small>
 
-            </small>
+</div>
 
-        </div>
+<div>
 
-        <span class="amount">
+    <span class="amount">
 
-        ${transaction.amount>0?"+":"-"}
+        ${transaction.amount > 0 ? "+" : "-"}
 
         ₹${Math.abs(transaction.amount)}
 
-        </span>
+    </span>
 
-        `;
+    <button
+        class="delete-btn"
+        onclick="deleteTransaction(${transaction.id})"
+    >
+        ❌
+    </button>
+
+</div>
+
+`;
+        
+
+        
 
         transactionList.appendChild(li);
 
